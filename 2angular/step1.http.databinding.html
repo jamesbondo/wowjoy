@@ -1,0 +1,60 @@
+<head>
+    <title>医生列表</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" href="libs/bootstrap.min.css">
+    <script type="text/javascript" src="libs/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script type="text/javascript" src="libs/angular1.5.8.min.js"></script>
+    <script type="text/javascript" src="libs/angular-ui-router.min.js"></script>
+
+</head>
+
+
+
+
+
+<body ng-app="demoApp" ng-controller="demoCtrl">
+  <demo-component></demo-component>
+</body>
+
+<script type="text/javascript">
+angular.module('demoApp',[])
+.controller('demoCtrl',['$scope',function($scope){
+
+}])
+.component('demoComponent',{
+  template:
+  `
+    <div class="doc" ng-repeat="doc in doctors">
+      <span class="userName">{{doc.userName}}</span>
+      <span class="titleName">{{doc.titleName}}</span>
+    </div>
+  `,
+  // templateUrl:'templates/template1.html',
+  controller:function($scope){
+    $scope.doctors = [
+      {
+        userName:"Happy Potter",
+        titleName:'J.K.Rocky'
+      },
+      {
+        userName:'Dog Walk',
+        titleName:'JP Morgan'
+      },
+      {
+        userName:'论语',
+        titleName:'捆子'
+      },
+      {
+        userName:'孙子兵法',
+        titleName:'孙子'
+      }
+    ];
+
+  }
+})
+</script>

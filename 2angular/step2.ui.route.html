@@ -1,0 +1,58 @@
+    <!-- source http://devdocs.io/angularjs~1.5/guide/scope -->
+
+    <link rel="stylesheet" href="libs/bootstrap.min.css">
+    <script type="text/javascript" src="libs/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script type="text/javascript" src="libs/angular1.5.8.min.js"></script>
+    <script type="text/javascript" src="libs/angular-ui-router.min.js"></script>
+
+
+
+<body ng-app="demoApp">
+
+  <demo-component></demo-component>
+
+</body>
+
+<script type="text/javascript" src="data/doctors.js"></script>
+<script type="text/javascript">
+
+angular.module('demoApp',[])
+
+.component('demoComponent',{
+  template:`
+    <button class="btn" ng-click="load()">加载真实数据</button>
+    <div class="doc" ng-repeat="doc in doctors">
+      <span class="userName">{{doc.userName}}</span>
+      <span class="titleName">{{doc.titleName}}</span>
+    </div>
+  `,
+  controller:function($scope){
+    $scope.doctors = [
+      {
+        userName:"在请求数据之前",
+        titleName:'a'
+      },
+      {
+        userName:'这里填充的假数据',
+        titleName:'b'
+      },
+      {
+        userName:'为了看起来不空白',
+        titleName:'c'
+      },
+      {
+        userName:'随便放点东西在这里就好',
+        titleName:'d'
+      }
+    ];
+
+    $scope.load = function(){
+      $scope.doctors = doctorList;
+    }
+  }
+})
+
+</script>
+

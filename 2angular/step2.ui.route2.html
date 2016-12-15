@@ -1,0 +1,97 @@
+    <!-- source http://devdocs.io/angularjs~1.5/guide/scope -->
+
+    <link rel="stylesheet" href="libs/bootstrap.min.css">
+    <script type="text/javascript" src="libs/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script type="text/javascript" src="libs/angular1.5.8.min.js"></script>
+    <script type="text/javascript" src="libs/angular-ui-router.min.js"></script>
+
+
+
+<body ng-app="demoApp">
+
+  <div ui-view="switch"></div>
+
+</body>
+
+<script type="text/javascript" src="data/doctors.js"></script>
+<script type="text/javascript">
+
+angular.module('demoApp',['ui.router'])
+
+.component('demoComponent',{
+  template:`
+    <button class="btn btn-primary" ng-click="switch()">切换</button>
+    <button class="btn" ng-click="load()">加载真实数据</button>
+    <div class="doc" ng-repeat="doc in doctors">
+      <span class="userName">{{doc.userName}}</span>
+      <span class="titleName">{{doc.titleName}}</span>
+    </div>
+  `,
+  controller:function($scope,$state){
+    $scope.doctors = [
+      {
+        userName:"在请求数据之前",
+        titleName:'a'
+      },
+      {
+        userName:'这里填充的假数据',
+        titleName:'b'
+      },
+      {
+        userName:'为了看起来不空白',
+        titleName:'c'
+      },
+      {
+        userName:'随便放点东西在这里就好',
+        titleName:'d'
+      }
+    ];
+
+    $scope.load = function(){
+      $scope.doctors = doctorList;
+    }
+    $scope.switch = function(){
+      $state.go('b')
+    }
+  }
+})
+.component('somethingElse',{
+  template:`
+  <button class="btn btn-primary" ng-click="switch()">切换</button>
+  <h1>Hey this is something else!!! </h1>`,
+  controller:function($scope,$state){
+    alert("This is something else. I appear everytime you see my component")
+    $scope.switch = function(){
+      $state.go('a')
+    }
+  }
+})
+
+.config(function($stateProvider, $urlRouterProvider) {
+
+  $urlRouterProvider.otherwise("/a");
+
+  $stateProvider
+    .state('a',{
+      url:'/a',
+      views:{
+        'switch':{
+          template:`<demo-component></demo-component>`
+        }
+      }
+    })
+    .state('b',{
+      url:'/b',
+      views:{
+        'switch':{
+          template:`<something-else></something-else>`
+        }
+      }
+    })
+
+});
+
+</script>
+

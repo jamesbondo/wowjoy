@@ -11,7 +11,10 @@
 <script type="text/javascript">
 angular.module("myApp", [])
   .component("helloWorld",{
-    template: '<h1>Hello World!</h1><my-component><my-component>'
+    template: `<h1>Hello World!</h1><my-component><my-component>
+      <my-component><my-component>
+      <my-component><my-component>
+    `
   })
   .component('myComponent',{
     template:'<h1>This is my new component</h1>'

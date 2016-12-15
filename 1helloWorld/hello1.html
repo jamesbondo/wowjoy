@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="libs/bootstrap.min.css">
+<script type="text/javascript" src="libs/angular1.5.8.min.js"></script>
+
+
+
+<div ng-app="myApp"> 
+  <hello-world> </hello-world>
+</div>
+
+<script type="text/javascript">
+angular.module("myApp", [])
+  .component("helloWorld",{
+    template: '<h1>Hello World!</h1>'
+  })
+</script>

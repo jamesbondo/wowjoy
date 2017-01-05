@@ -1,0 +1,32 @@
+    <script src="public/libs/angular1.5.8.min.js"></script>
+
+<body ng-app="testApp">
+  <test-component></test-component>
+  
+</body>
+
+<script type="text/javascript">
+angular.module('testApp',[])
+.component('testComponent',{
+  template:`
+    <p ng-repeat="n in range(1,nn)">{{n}}</p>
+  `,
+  bindings:{},
+  controller:function($scope,$timeout){
+    $scope.nn=5;
+    
+    $timeout(function(){
+      $scope.nn=10;
+    },1000);
+
+    $scope.range = function(min, max, step) {
+        step = step || 1;
+        var input = [];
+        for (var i = min; i <= max; i += step) {
+            input.push(i);
+        }
+        return input;
+    };
+  }
+})
+</script>
